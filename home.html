@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            direction: rtl; /* دعم الكتابة من اليمين لليسار */
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .header {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .post-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-box textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            direction: rtl; /* دعم الكتابة بالعربية */
+            text-align: right; /* محاذاة النص إلى اليمين */
+        }
+        .post-box button {
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .post-box button:hover {
+            background: #0056b3;
+        }
+        .posts {
+            margin: 20px 0;
+        }
+        .post {
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            direction: rtl; /* دعم الكتابة بالعربية */
+            text-align: right; /* محاذاة النص إلى اليمين */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>مرحبا، <span id="username"></span>!</h1>
+    </div>
+    <div class="container">
+        <div class="post-box">
+            <textarea id="postContent" rows="4" placeholder="اكتب منشورك هنا..."></textarea>
+            <button onclick="post()">نشر</button>
+        </div>
+        <div class="posts" id="postsContainer">
+            <!-- المنشورات ستظهر هنا -->
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            const name = localStorage.getItem('name');
+            document.getElementById('username').innerText = name || 'الزائر';
+        };
+
+        function post() {
+            const content = document.getElementById('postContent').value;
+            if (content) {
+                const postsContainer = document.getElementById('postsContainer');
+                const post = document.createElement('div');
+                post.className = 'post';
+                post.textContent = content;
+                postsContainer.prepend(post);
+                document.getElementById('postContent').value = '';
+            } else {
+                alert('الرجاء إدخال نص المنشور');
+            }
+        }
+    </script>
+
+</body></html>
